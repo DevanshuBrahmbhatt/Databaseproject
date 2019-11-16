@@ -1,4 +1,19 @@
+
+
+
 <?php
+
+
+
+session_start();
+if (isset($_SESSION['collegeId']) && $_SESSION['collegeId'] == true) {
+   // $welcomeMessage = "Welcome to the member's area, " . $_SESSION['user_id'] . "!";
+
+} else {
+    header('Location:Login.php');
+}
+
+
 include_once('Navbar.php');
 ?>
 
@@ -11,6 +26,8 @@ require_once("Connection.php");
 $sql= "select * from department";
 $dataProduct= $conn->query($sql);
 
+$sql1= "select * from exam_type";
+$dataProduct3= $conn->query($sql1);
 
 
 
@@ -37,7 +54,8 @@ $dataProduct= $conn->query($sql);
 	
 	
 		
-		<script>
+	<script>
+	
 		function showUser(str) {
     if (str == "") {
         document.getElementById("txtHint").innerHTML = "";
@@ -52,15 +70,21 @@ $dataProduct= $conn->query($sql);
         }
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("txtHint").innerHTML = this.responseText;
+				
+			                document.getElementById("semester").innerHTML = this.responseText;
             }
         };
         xmlhttp.open("GET","getuser.php?d_no="+str,true);
+		
         xmlhttp.send();
+		
+		
+		
+		
     }
 }
 
-function showUser1(str) {
+	function showUser1(str) {
     if (str == "") {
         document.getElementById("txtHint").innerHTML = "";
         return;
@@ -74,15 +98,62 @@ function showUser1(str) {
         }
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("txtHint").innerHTML = this.responseText;
+				 
+                document.getElementById("subject").innerHTML = this.responseText;
             }
         };
-        xmlhttp.open("GET","getuser1.php?d_no="+str,true);
+        xmlhttp.open("GET","getuser1.php?sem_no="+str,true);
+		
         xmlhttp.send();
+		
+		
+		
+		
     }
 }
 
-		</script>
+</script>
+
+		
+<!--<script>
+		  
+$(document).ready(function(){
+    $('#department').on('change',function(){
+        var d_no = $(this).val();
+        if(d_no){
+            $.ajax({
+                type:'POST',
+                url:'ajaxdata.php',
+                data:'d_no='+d_no,
+                success:function(html){
+                    $('#semester').html(html);
+                    $('#subject').html('<option value="">Select semester first</option>'); 
+                }
+            }); 
+        }else{
+            $('#state').html('<option value="">Select Department first</option>');
+            $('#city').html('<option value="">Select Semester first</option>'); 
+        }
+    });
+	
+	   $('#semester').on('change', function(){
+        var sem_no = $(this).val();
+        if(sem_no){
+            $.ajax({
+                type:'POST',
+                url:'ajaxData.php',
+                data:'sem_no='+sem_no,
+                success:function(html){
+                    $('#subject').html(html);
+                }
+            }); 
+        }else{
+            $('#city').html('<option value="">Select semester first</option>'); 
+        }
+    });
+
+});
+</script>-->
 
 </head>
 
@@ -99,7 +170,9 @@ function showUser1(str) {
 			
 			
   		<br><br><label>Select Dept</label>
-  		<form id="form"  action="#"  method="POST"> 
+		
+		
+  		<form id="form"  action="Student_1DownPapers.php"  method="POST"> 
 		
   		<select class="browser-default" id="department" name="department" onchange="showUser(this.value)" required>
     		<option  value="" disabled selected>Choose your Dept</option>
@@ -120,32 +193,14 @@ function showUser1(str) {
 		?>
 	
 	  		</select>
-			<div id="txtHint"><b>Person info will be listed here...</b></div>
 
-			
+			 
 		
   
     	<br><label>Select Semester</label>
-  		<select class="browser-default" name="semester" onchange="showUser1(this.value)" required>
+  		<select class="browser-default" name="semester" id="semester" onchange="showUser1(this.value)"  required>
     		<option value="" disabled selected>Choose your Semester</option>
-    		<?php
-			
-			
-			//$d_no = intval($_GET['d_no']);
-			//$sql= "select * from semester whrere d_no='$d_no'  ";
-			$dataProduct1= $conn->query($sql);
-			
-			
-			
-			
-			
-							if($dataProduct1!=null) {
-										
-										foreach($dataProduct1 as $d=>$c) {
-											echo "<option value='" .$c["sem_no"]  ."'> ".$c["semester"]."</option>\n";
-										}
-									}
-		?>
+    		
 			
     	</select>
 		
@@ -153,29 +208,32 @@ function showUser1(str) {
 		
 		
 		<br><label>Select Subject</label>
-  		<select class="browser-default" name="gender" required>
+  		<select class="browser-default" name="subject" id="subject" required>
     		<option value="" disabled selected>Choose your Subject</option>
-    		<option value="1">Java</option>
-    		<option value="2">Dbms</option>
-			<option value="2">Amp</option>
-			<option value="2">Tafl</option>
-			<option value="2">Daa</option>
-			<option value="2">Security</option>
-			
+    		
     	</select>
 		
 		
 		
 		
     	<br><label>Select Exam-type</label>
-  		<select class="browser-default" name="gender" required>
+  		<select class="browser-default" name="exam_type" required>
     		<option value="" disabled selected>Choose your Exam-type</option>
-    		<option value="E1">Sessional-1</option>
-    		<option value="E2">Sessional-2</option>
-			<option value="E2">Sessional-3</option>
-			<option value="E2">External</option>
-			<option value="E2">Remedial</option>
-			<option value="E2">ReRemedial</option>
+    		<?php
+							if($dataProduct3!=null) {
+										
+										foreach($dataProduct3 as $d=>$c) {
+										echo "<option value='" .$c["exam_id"]  ."'> ".$c["exam_type"]."</option>\n";
+										
+											
+										}
+									}
+									
+							
+						
+							
+						
+		?>
     	</select>
 		
     		<br>

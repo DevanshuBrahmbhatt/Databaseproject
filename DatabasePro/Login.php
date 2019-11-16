@@ -1,8 +1,4 @@
-<?php
-// Starting session
-session_start();
-//echo "session_start()";
-?>
+
 
 
 <?php
@@ -28,22 +24,25 @@ include_once('Navbar.php');
 }
 
 .not-exists{
-    color: green;
-}
-
-.exists{
     color: red;
 }
 
+.exists{
+	  color: green;
+    
+}
 
 
+#back {
+	display:none;
+}
 </style>
 
 
 
 <br><div class="container">
 
-			<form  action="Loginaction.php" method="POST"  class=" form col s12">
+			<form  action="Loginaction.php?v=1" method="POST"  class=" form col s12">
 			
 			
 				
@@ -68,7 +67,7 @@ include_once('Navbar.php');
       <div class="row">	
            <div class="input-field col s12">
           <i class="material-icons prefix">person</i>
-          <input  name="username"  placeholder="College_Id"  id="username" type="text"  pattern="[A-Za-z]+"  title=" characters only" required>
+          <input  name="collegeId"  placeholder="College_Id"  id="collegeId" type="text"  title=" characters only" required>
          <div id="username_response"></div>
         </div>
     
@@ -124,25 +123,25 @@ include_once('Navbar.php');
 
 $(document).ready(function(){
 
-   $("#username").keyup(function(){
+   $("#collegeId").keyup(function(){
 
-      var username = $("#username").val().trim();
-	 // alert(username);
+      var collegeId = $("#collegeId").val().trim();
+	// alert(username);
 
-      if(username != ''){
+      if(collegeId != ''){
 
          $("#username_response").show();
 
          $.ajax({
             url: 'User_check.php',
             type: 'post',
-            data: {username:username},
+            data: {collegeId:collegeId},
             success: function(response){
 
                 if(response > 0){
-                    $("#username_response").html("<span class='exists'>* User Already exists.</span>");
+                    $("#username_response").html("<span class='exists'> User Available.</span>");
                 }else{
-                    $("#username_response").html("<span class='not-exists'> User Available.</span>");
+                    $("#username_response").html("<span class='not-exists'> User Not Available SignUp.</span>");
                 }
 
              }

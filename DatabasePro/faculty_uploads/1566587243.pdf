@@ -1,0 +1,16 @@
+
+
+
+<br />
+<b>Notice</b>:  Undefined variable: pdf_id in <b>C:\xampp\htdocs\DatabasePro\getpdf.php</b> on line <b>19</b><br />
+ SELECT pdf FROM pdf WHERE pdf_id='' <br />
+<b>Notice</b>:  Undefined variable: link in <b>C:\xampp\htdocs\DatabasePro\getpdf.php</b> on line <b>22</b><br />
+<br />
+<b>Warning</b>:  mysqli_query() expects parameter 1 to be mysqli, null given in <b>C:\xampp\htdocs\DatabasePro\getpdf.php</b> on line <b>22</b><br />
+<br />
+<b>Warning</b>:  mysqli_fetch_object() expects parameter 1 to be mysqli_result, null given in <b>C:\xampp\htdocs\DatabasePro\getpdf.php</b> on line <b>24</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'pdf' of non-object in <b>C:\xampp\htdocs\DatabasePro\getpdf.php</b> on line <b>26</b><br />
+
+
+

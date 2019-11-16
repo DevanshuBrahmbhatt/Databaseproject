@@ -1,0 +1,9 @@
+DELIMITER//
+CREATE PROCEDURE get_student()  
+BEGIN  
+SELECT * FROM signup where semester>0;  
+END;// 
+DELIMITER;
+
+
+Call get_student()  ;

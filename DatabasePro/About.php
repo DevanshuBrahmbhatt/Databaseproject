@@ -1,6 +1,19 @@
 
+
 	 
 	 <?php
+	 
+	 
+session_start();
+if (isset($_SESSION['collegeId']) && $_SESSION['collegeId'] == true) {
+    //$welcomeMessage = "Welcome to the member's area, " . $_SESSION['username'] . "!";
+} else {
+    header('Location: Login.php');
+}
+
+
+
+
 	 include_once('Navbar.php');
 	 ?>
 	 <style>
@@ -53,20 +66,14 @@ img {
 						<div class="row">
 							<div class="col s12 l6">
 									<h5 class="white-text  light"><blockquote><strong>Our Purpose<strong></blockquote></h5>
-		                  			<p class="grey-text text-lighten-4 flow-text">We, Slyro is a service-based and non-profitable company.
-									Our purpose is just to deliver the best service, which is done by technology, By using Slyro you can
-									find the best PG and Hostels in the city.
-			We are working on updating all the information regarding the PG so that it will be convenient for you to choose the most suitable one.
-							We hope you can find everything you need. Our main focus will be on providing high-quality service and customer satisfaction. We will 
- do everything to meet your 		expectations.
+		                  			<p class="grey-text text-lighten-4 flow-text">
+	Our Purpose is simply provide an Exam-Papers and  Study-Materials to every student very easily. And how to contribute in University as a Student.
 
-
-
-.</p>
+</p>
 			                </div>
                             <div class="col s12 l6">
-                            	<img src="images/purpose.png" alt="slyro-logo" class="responsive-img">
-                                <p class="grey-text text-lighten-4 footer-description"><b>Malgadi</b> is a subsidiary company of <b><a href="http://hitempsolutions.com/" target="_BLANK">Hitempsolution <i class="fa fa-external-link" aria-hidden="true"></i></a></b>.</p>
+                            	<img src="images/ddu.jpg" alt="ddu-logo" class="responsive-img">
+                                <p class="grey-text text-lighten-4 footer-description"><b>DDU</b> University <b><a href="https://www.ddu.ac.in/" target="_BLANK">DDU <i class="fa fa-external-link" aria-hidden="true"></i></a></b>.</p>
                             </div>
 		    			</div>
 		    	</div>
@@ -78,8 +85,8 @@ img {
 							
 							
 												<div class="col s12 m6 l8 ">
-                            <img src="images/dev.jpg" alt="Slyro Photo" class="responsive-img" >
-						<a href="https://www.linkedin.com/in/devanshubrahmbhatt/" style="color: #004d40"	><p align="center"> Devanshu Brahmbhatt</p></a>
+                            <img src="images/dev1.jpg" alt="DDU" class="responsive-img" >
+						<a href="https://www.linkedin.com/in/devanshubrahmbhatt/" style="color: #004d40"><p align="center" class="fa fa-linkedin"> &nbsp Devanshu Brahmbhatt</p></a>
 							</div>
 						
 							
@@ -87,30 +94,13 @@ img {
                     	<div class="col s12 l6">
                     		<p class="grey-text text-lighten-4 flow-text">  
 
-
-
-
-
-Slyro is a start-up that is initiated by the students at DDU University. It is a service that provides information about PG and Hostels for more convenience. We are three developers. 
-
-
-
-Sachin Thakkar is a Back-end developer, He manages the team and does plans for doing things in more innovative ways. 
+							It is My Database Managment System Project.	<br> Guided By Prof.R.M.Raval Madam Under I.T Dept.
 
 
 
 
 
-
-Devanshu Brahmbhatt is a Front-end developer He has designed Website. 
-
-
-
-Our main focus as developers is how to spread and enhance technology making life easier. We are so eager to meet developers like us so, If you want to join us then please contact us, We will be glad to see you.
-
-
-
-.</p>
+</p>
                     	</div>
 		    		</div>
 

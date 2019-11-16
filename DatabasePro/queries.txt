@@ -1,0 +1,40 @@
+1.  select *from subject,pdf
+    where subject.sub_id=pdf.sub_id;
+
+
+2. SELECT subject.subname  //to display subname which are selected downloadin papers
+   FROM subject
+   INNER JOIN pdf ON pdf.sub_id=subject.sub_id;
+
+
+3. SELECT exam_type.exam_type   //exam_type like s-1 or s-2 for final download
+   FROM exam_type
+   INNER JOIN pdf ON pdf.exam_id=exam_type.exam_id;
+
+
+
+4.  SELECT subject.subname 
+    FROM subject
+    INNER JOIN faculty ON faculty.sub_id=subject.sub_id;
+
+
+5. Select  f_name  //to display faculties name who are taking lectures.
+   from faculty
+   INNER JOIN subject on subject.sub_id=faculty.sub_id;
+
+
+6. SELECT pdf_id FROM `pdf` WHERE sub_id=1 IN
+   (SELECT subname from `subject` WHERE sub_id=1);
+
+7. SELECT subname from subject where sub_id IN (SELECT sub_id from pdf); //first subquery	
+
+8.SELECT * from pdf where sub_id=1 and exam_id=1 IN (SELECT subname from subject where sub_id=1);
+
+9.select * from pdf  INNER JOIN subject ON pdf.sub_id=subject.sub_id 
+ where pdf.sub_id='1' and pdf.exam_id='1';
+
+10.select * from pdf  INNER JOIN subject ON pdf.sub_id=subject.sub_id 
+INNER JOIN exam_type on pdf.exam_id=exam_type.exam_id
+ where pdf.sub_id='1' and pdf.exam_id='1';
+
+11.select *from faculty inner join subject on faculty.sub_id=subject.sub_id where faculty.sub_id='1' and faculty.d_no='1' and faculty.sem_no='1'

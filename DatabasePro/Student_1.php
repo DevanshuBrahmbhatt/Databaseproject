@@ -1,3 +1,16 @@
+
+
+<?php
+session_start();
+if (isset($_SESSION['collegeId']) && $_SESSION['collegeId'] == true) {
+    //$welcomeMessage = "Welcome to the member's area, " . $_SESSION['username'] . "!";
+} else {
+    header('Location: Login.php');
+}
+?>
+	
+	
+	
 <?php
 include_once('Navbar.php');
 ?>

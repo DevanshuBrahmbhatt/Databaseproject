@@ -14,17 +14,19 @@ include 'Connection.php';
     $email = $_POST['email'];
 	$password=$_POST['password'];
 	$d_no=$_POST['d_no'];
+	$phone=$_POST['phone'];
+	$semester=$_POST['semester'];
 	
 	
     
- $sql="insert into signup  (username,collegeId,email,password,d_no)
- values('$username','$collegeId','$email','$password','$d_no')";
+ $sql="insert into signup  (username,collegeId,semail,password,d_no,phone,semester)
+ values('$username','$collegeId','$email','$password','$d_no','$phone','$semester')";
  
  
 if($conn->query($sql)==TRUE)
 {
     echo"sucess";
-    header('Location:Student_1.php');
+    header('Location:index.php');
 }
 
  else {

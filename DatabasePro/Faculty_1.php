@@ -1,10 +1,33 @@
+
+
+<?php
+/*
+session_start();
+if (isset($_SESSION['username']) && $_SESSION['user_id'] == true) {
+    //$welcomeMessage = "Welcome to the member's area, " . $_SESSION['username'] . "!";
+} else {
+    header('Location: Faculty_Login.php');
+}*/
+?>
+	
+
 <?php
 include_once('Navbar.php');
+
+
+include_once('Connection.php');
+
+$sql= "select * from department";
+$dataProduct= $conn->query($sql);
+
+
+
 ?>
 
 <head>
 
 	<style>
+
 
 
 #heading{
@@ -31,19 +54,96 @@ include_once('Navbar.php');
 	color:grey;
 }
 
+
+#back {
+	display:none;
+}
+
 	</style>
+	
+	
+	<script>
+	
+		function showUser(str) {
+    if (str == "") {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+				
+			                document.getElementById("semester").innerHTML = this.responseText;
+							  $('#semester').material_select();
+            }
+        };
+        xmlhttp.open("GET","getuser.php?d_no="+str,true);
+		
+        xmlhttp.send();
+		
+		
+		
+		
+    }
+}
+
+	function showUser1(str) {
+    if (str == "") {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+				 
+                document.getElementById("subject").innerHTML = this.responseText;
+				  $('#subject').material_select();
+            }
+        };
+        xmlhttp.open("GET","getuser1.php?sem_no="+str,true);
+		
+        xmlhttp.send();
+		
+		
+		
+		
+    }
+}
+
+</script>
+
 	
 </head>
 
 <body>
 
+ 
 <div class="show">
-<p><br></p>
+<p></p>
 
 </div>
 
 
 
+<!--		<div class="input-field col s6">
+		 <a href="Faculty_Show.php" > <button class="btn #d84315 deep-orange darken-3"   type="submit"
+				class="black-text text-black" id="showupload"  name="showupload">Show Uploads
+				<i class="material-icons right">dashboard</i>
+				</button></a>
+
+		</div>-->
 
 <div class="container">
 
@@ -52,7 +152,7 @@ include_once('Navbar.php');
  <div class="row">
 
 
-    <form  action="#" method="post" enctype="multipart/form-data" class="col s12">
+    <form enctype="multipart/form-data"  action="FacultyAction.php" method="POST"  class="col s12">
 
 		<div class="z-depth-2 #fafafa grey lighten-5"> 
 
@@ -66,14 +166,14 @@ include_once('Navbar.php');
 <!-------------------------first row-------------------------------------------->
       <div class="row">
         <div class="input-field   col s6">
-          <i class="material-icons prefix"></i>
-          <input name="owner_name" class="black-text text-black"  placeholder="Faculty_Name"  id="owner_name" type="text" pattern="[A-Za-z]+" autofocus>
+       
+          <input  name="f_name" class="black-text text-black"  placeholder="Faculty_Name"  id="f_name" type="text" pattern="[A-Za-z]+" autofocus>
          </div>
 
 
         <div class="input-field col s6">
-          <i class="material-icons prefix"></i>
-          <input name="phone" name="phone"  placeholder="Intials eg.MMG"  id="initials" type="text"  pattern="[A-Za-z]+"  title=" characters only" required>
+        
+          <input name="f_init"   placeholder="Intials eg.MMG"  id="f_init" type="text"  pattern="[A-Za-z]+"  title=" characters only" required>
          
         </div>
       </div>
@@ -83,71 +183,54 @@ include_once('Navbar.php');
 	     <div class="row">
 
 
-			<div class="input-field col s6">
-          <i class="material-icons prefix"></i>
-              <select class="select" required>
-                 <option value="" disabled selected type="hidden" id="gender" >Department</option>
-                 <option value="1" id="gender">Computer</option>
-                 <option value="2"  id="gender">Information Technology</option>
-				 <option value="2"  id="gender">Electronics </option>
-				<option value="2"  id="gender">Mechanical</option>
-				<option value="2"  id="gender">Chemical</option>
-
-
-              </select>
-        <label for="icon_bubble_chart"></label>
-        </div>
-      		
-		
-				
-				
 		<div class="input-field col s6">
-          <i class="material-icons prefix"></i>
-              <select class="select" required>
-                 <option value="" disabled selected type="hidden" id="gender" >Semester</option>
-                 <option value="1" id="gender">Computer</option>
-                 <option value="2"  id="gender">Information Technology</option>
-				 <option value="2"  id="gender">Electronics </option>
-				<option value="2"  id="gender">Mechanical</option>
-				<option value="2"  id="gender">Chemical</option>
-
-
-              </select>
-        <label for="icon_bubble_chart"></label>
-        </div>
-      		
-
         
-       
+		   <select class="select"  id="department" name="department" onchange="showUser(this.value)" required>
+    		<option  value="" disabled selected>Choose your Dept</option>
+    	<?php
+							if($dataProduct!=null) {
+										
+										foreach($dataProduct as $d=>$c) {
+										echo "<option value='" .$c["d_no"]  ."'> ".$c["d_name"]."</option>\n";
+										
+											
+										}
+									}
+		?>
+	
+			</select>
+		</div>
 
-      </div>
-      <!-------------------------Third row-------------------------------------------->
-
-      <!-------------------------fourth row-------------------------------------------->
-
-	 <div class="row">
-
-
-				  <div class="input-field col s6">
-          <i class="material-icons prefix"></i>
-              <select class="select" required>
-                 <option value="" disabled selected type="hidden" id="gender" >Subjects</option>
-                 <option value="1" id="gender">Computer</option>
-                 <option value="2"  id="gender">Information Technology</option>
-				 <option value="2"  id="gender">Electronics </option>
-				<option value="2"  id="gender">Mechanical</option>
-				<option value="2"  id="gender">Chemical</option>
-
-
-              </select>
-        <label for="icon_bubble_chart"></label>
-        </div>
-      		
+			 
+		
+  
+		<div class="input-field col s6">
+		
+          
+    	<select class="select"  name="semester" id="semester" onchange="showUser1(this.value)"  required>
+    		<option value="" disabled selected>Choose your Semester</option>
+    		
+			
+    	</select>
+		
+		</div>
+		</div>
+		
+		
+		<div class="row">
+		
+		<div class="input-field col s6">
+		<select  class="select" name="subject" id="subject" required>
+    		<option value="" disabled selected>Choose your Subject</option>
+    		
+    	</select>
+		
+		</div>
 			
 
 			 <div class="input-field col s6">
-          <i class="material-icons prefix"> </i>
-          <input  placeholder="Topic Related"   name="distance" type="text" id="topics" required>
+         
+          <input  placeholder="Topic Related"   name="topic" type="text" id="topic" required>
            </div>
 
 
@@ -162,7 +245,7 @@ include_once('Navbar.php');
  <div class="file-field input-field">
       <div class="btn #d84315 deep-orange darken-3">
         <span>File</span>
-        <input type="file" >
+        <input  name="myfile" type="file" >
       </div>
       <div class="file-path-wrapper">
         <input class="file-path validate" placeholder="Upload File" type="text">
@@ -180,13 +263,14 @@ include_once('Navbar.php');
 
 
 
-	  <div class="input-field col s12" >
-				<button class="btn #d84315 deep-orange darken-3"  onclick= "valid()" type="submit"
+	  <div class="input-field col s6" >
+				<button class="btn #d84315 deep-orange darken-3"   type="submit"
 				class="black-text text-black" id="postsubmit"  name="submit">Submit
 				<i class="material-icons right">send</i>
 				</button><br><br><br>
 		</div>
-
+		
+		
 </div>
 
 
