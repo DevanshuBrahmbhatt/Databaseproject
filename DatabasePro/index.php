@@ -1,13 +1,17 @@
+
+
 <html>
     <head>
 	
 	
 		<title>
 
-					DharmSinh Desai University
+					For Students
 		</title>
 
-		<link rel="shotcut icon" type="images/png"  href="#">
+		
+
+		<link rel="shotcut icon" type="images/png"  href="images/ddu.jpg">
 
 	<link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
       <!--Import Google Icon Font-->
@@ -63,7 +67,7 @@
 				
 						<div class="box"><br>
 						
-						<h2   style="color:#e85a50"    align="center">DDU PSPP</h2><br>
+						<h2   style="color:#e85a50"    align="center">StudentCloud</h2><br>
 						
 						
 						<div class="container">
@@ -91,7 +95,7 @@
 									<div class="card-stacked">
 									
 										<div class="card-content">
-											<a style="color:white" href="Faculty_1.php">
+											<a style="color:white" href="Faculty_Login.php">
 											  <h3 align="center" style="color:#eae8dc">Faculty</h3></a>
 										</div>
 										

@@ -2,10 +2,10 @@
 include_once('Connection.php');
 
 /* Get username */
-$username = $_POST['username'];
+$collegeId = $_POST['collegeId'];
 
 /* Query */
-$query = "select count(*) as cntUser from signup where username='$username'";
+$query = "select count(*) as cntUser from signup where collegeId='$collegeId'";
 
 
 

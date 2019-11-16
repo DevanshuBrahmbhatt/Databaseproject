@@ -1,13 +1,39 @@
+
+<?php
+
+
+
+/*include_once('Loginaction.php');
+
+
+$_SESSION['username']=$inUsername;
+
+
+
+
+
+
+if(!isset($_SESSION['userId']))
+{
+    // not logged in
+    header('Location: index.php');
+    exit();
+}
+*/
+?>
+
+
+
 <html>
     <head>
 	
 	
 		<title>
 
-					DharmSinh Desai University
+					For Students  
 		</title>
 
-		<link rel="shotcut icon" type="images/png"  href="#">
+		<link rel="shotcut icon" type="images/png"  href="images/ddu.jpg">
 
 	<link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
       <!--Import Google Icon Font-->
@@ -54,7 +80,7 @@
 <nav class="nav-extended">
 
       <div class="nav-wrapper">
-        <a href="index.php" style="color:#eae8dc"  class="brand-logo">&nbsp &nbsp  DharmSinh Desai University</a>
+        <a href="index.php" style="color:#eae8dc"  class="brand-logo">&nbsp &nbsp  StudentCloud</a>
         <a href="#"  class="button-collapse" class="sidenav-trigger" data-target="slide-out"  data-activates="mobile-demo" ><i class="material-icons" aria-hidden="true">menu</i></a>
 	<!---	  <a href="#"  ><i class="fa fa-bars" ></i></a>-->
 
@@ -73,20 +99,20 @@
 
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="index.php" style="color:#eae8dc" >Home</a></li>
-          <li><a href="Contact.php" style="color:#eae8dc" >Contact</a></li>
+          <li><a href="Appointment" target="_blank" style="color:#eae8dc" >Appointment</a></li>
 		   <li><a href="About.php" style="color:#eae8dc"  >AboutUs</a></li>
-		   <li><a href="Login.php" style="color:#eae8dc" >LogIn</a></li>
-		    <li><a href="SignUp.php" style="color:#eae8dc" >SignUp</a></li>
+		   <li><a href="LogOut.php" style="color:#eae8dc" >LogOut</a></li>
+		<!--    <li><a href="SignUp.php" style="color:#eae8dc" >SignUp</a></li>-->
        <!--   <li><a class="dropdown-button" href="#!" data-hover="true" data-beloworigin="true" data-activates="dropdown2" onmouseover="drop()">CITIES<i class="material-icons right">arrow_drop_down</i></a></li>-->
   	    <!-- <li><a href="collapsible.html">JavaScript</a></li> -->
         </ul>
 
         <ul class="side-nav" id="mobile-demo">
           <li><a href="index.php"style="color:#e85a50" >Home</a></li>
-          <li><a href="Contact.php" style="color:#e85a50" >Contact</a></li>
+          <li><a href="Appointment" target="_blank" style="color:#e85a50" >Appointment</a></li>
 		   <li><a href="About.php" style="color:#e85a50" >AboutUs</a></li>
-		   <li><a href="Login.php" style="color:#e85a50" >LogIn</a></li>
-		    <li><a href="SignUp.php" style="color:#e85a50" >SignUp</a></li>
+		   <li><a href="LogOut.php" style="color:#e85a50" >LogOut</a></li>
+		<!--    <li><a href="SignUp.php" style="color:#e85a50" >SignUp</a></li>-->
       <!--      <li><a class="dropdown-button" href="#!" data-hover="true" data-beloworigin="true"  data-activates="dropdown1" onmouseover="drop()">CITIES<i class="material-icons right">arrow_drop_down</i></a></li>-->
           <!-- <li><a href="collapsible.html">JavaScript</a></li> -->
         </ul>

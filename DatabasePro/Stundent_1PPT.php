@@ -1,12 +1,102 @@
+
+
 <?php
+
+
+session_start();
+if (isset($_SESSION['collegeId']) && $_SESSION['collegeId'] == true) {
+   // $welcomeMessage = "Welcome to the member's area, " . $_SESSION['user_id'] . "!";
+
+} else {
+    header('Location:Login.php');
+}
+
+
 include_once('Navbar.php');
 ?>
 
+
+<?php
+
+
+require_once("Connection.php");
+
+$sql= "select * from department";
+$dataProduct= $conn->query($sql);
+
+
+?>
 <head>
+
+
 
 	<style>
 
 	</style>
+	
+	
+		
+	<script>
+	
+		function showUser(str) {
+    if (str == "") {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+				
+			                document.getElementById("semester").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET","getuser.php?d_no="+str,true);
+		
+        xmlhttp.send();
+		
+		
+		
+		
+    }
+}
+
+	function showUser1(str) {
+    if (str == "") {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+				 
+                document.getElementById("subject").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET","getuser1.php?sem_no="+str,true);
+		
+        xmlhttp.send();
+		
+		
+		
+		
+    }
+}
+
+</script>
+
+	
 	
 </head>
 
@@ -23,39 +113,44 @@ include_once('Navbar.php');
 			
 			
   		<br><br><label>Select Dept</label>
+		
   		<form action="Student_1DownPPT.php"  method="POST"> <input type="hidden" name="" value="">
-  		<select class="browser-default" name="range" required>
-    		<option value="" disabled selected>Choose your Dept</option>
-    		<option value="D1">Computer</option>
-    		<option value="D2">IT</option>
-    		<option value="D3">Chemical</option>
-			<option value="D4">Mech</option>
-			<option value="D5">IC</option>
+		
+  			<select class="browser-default" id="department" name="department" onchange="showUser(this.value)" required>
+    		<option  value="" disabled selected>Choose your Dept</option>
+    	<?php
+							if($dataProduct!=null) {
+										
+										foreach($dataProduct as $d=>$c) {
+										echo "<option value='" .$c["d_no"]  ."'> ".$c["d_name"]."</option>\n";
+										
+											
+										}
+									}
+									
+							
+						
+							
+						
+		?>
+	
 	  		</select>
-  
+
+	
     	<br><label>Select Semester</label>
-  		<select class="browser-default" name="gender" required>
+  		<select class="browser-default" name="semester" id="semester" onchange="showUser1(this.value)"  required>
     		<option value="" disabled selected>Choose your Semester</option>
-    		<option value="1">1</option>
-    		<option value="2">2</option>
-			<option value="2">3</option>
-			<option value="2">4</option>
-			<option value="2">5</option>
-			<option value="2">6</option>
+    		
 			
     	</select>
 		
+
 		
 		
-    	<br><label>Select Faculty_Name</label>
-  		<select class="browser-default" name="gender" required>
-    		<option value="" disabled selected>Choose Faculty_Name</option>
-    		<option value="E1">MMG</option>
-    		<option value="E2">HBP</option>
-			<option value="E2">JVM</option>
-			<option value="E2">YLP</option>
-			<option value="E2">SRS</option>
-			<option value="E2">RMR</option>
+		<br><label>Select Subject</label>
+  		<select class="browser-default" name="subject" id="subject" required>
+    		<option value="" disabled selected>Choose your Subject</option>
+    		
     	</select>
 		
 		

@@ -50,6 +50,15 @@ i.icon-orange{
 		color: red;
 	}
 
+
+	.matchpass{
+		color: green;
+	}
+
+	.notmatch{
+		color: red;
+	}
+
 </style>
 
 
@@ -91,9 +100,10 @@ i.icon-orange{
 
 
         <div class="input-field col s6">
-                   <input  name="collegeId"  placeholder="College_Id"  id="collegeId" type="text"  pattern=".{10}"  title=" 9 letters only" required>
+                   <input  name="collegeId"  placeholder="College_Id"  id="collegeId" type="text"  pattern=".{10}"  title=" 10 letters only" required>
          
         </div>
+			<div id="username_response"></div>
       </div>
 	  
 	  
@@ -128,12 +138,14 @@ i.icon-orange{
 		
 		  <div class="input-field   col s6">
        
-          <input name="email" class="black-text text-black"  placeholder="Email-Id"  id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" autofocus>
+          <input name="email" class="black-text text-black"  placeholder="Email-Id"  id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
          </div>
 
 		  
 		  
                    
+				   
+
         </div>
       		
 
@@ -142,6 +154,50 @@ i.icon-orange{
 
     
       <!-------------------------Third row-------------------------------------------->
+	  
+	  
+	  <!---newrow-->
+	  
+	  
+	  	     <div class="row">
+
+
+			<div class="input-field col s6">
+         
+              <select  name="semester"  id="semester" class="select"   required>
+			  
+			  
+                 <option   disabled selected type="hidden"><label>Semester</label></option>
+				 <option value="1">Semester 1</option>
+				 <option value="2">Semester 2</option>
+				 <option value="3">Semester 3</option>
+				 <option value="4">Semester 4</option>
+				 <option value="5">Semester 5</option>
+				 <option value="6">Semester 6</option>
+				 <option value="7">Semester 7</option>
+	
+	
+              </select>
+        <label for="icon_bubble_chart"></label>
+        </div>
+      		
+		
+				
+				
+		
+		  <div class="input-field   col s6">
+       
+          <input name="phone" class="black-text text-black"  placeholder="Phone Number"  id="phone" type="number" pattern="^\d{10}$" required>
+         </div>
+
+		  
+		  
+                   
+        </div>
+      		
+
+
+	  
 
       <!-------------------------fourth row-------------------------------------------->
 
@@ -151,7 +207,7 @@ i.icon-orange{
 			
 					<input id="password" name="password" type="password"  placeholder="Password"   pattern=".{6,}" title="Six or more characters" required>
 					<label for="icon_bubble_chart"></label>
-					<div id="username_response"></div>
+					<div id="password_response"></div>
  
 			</div>
       		
@@ -175,9 +231,9 @@ i.icon-orange{
 
 <div class="row">
 
-	 	   <div class="input-field col s12 m">
-				<button class="btn #d84315 deep-orange darken-3"  type="submit"
-				class="black-text text-black" id="submit"  name="submit">Register
+	 	   <div class="input-field col s12 ">
+				<button class="btn #d84315 deep-orange darken-3"  
+				class="black-text text-black"  type="submit" id="submit"  name="submit">Register
 				<i class="material-icons right">send</i>
 				</button><br><br><br>
 		</div>
@@ -212,7 +268,56 @@ i.icon-orange{
 
 
 
+
 <script>
+$(document).ready(function(){
+
+   $("#collegeId").keyup(function(){
+
+      var collegeId = $("#collegeId").val().trim();
+	 // alert(username);
+
+      if(collegeId != ''){
+
+         $("#username_response").show();
+
+         $.ajax({
+            url: 'User_check.php',
+            type: 'post',
+            data: {collegeId:collegeId},
+            success: function(response){
+
+                if(response > 0){
+					
+                    $("#username_response").html("<span class='exists'> User already exists.</span>");
+					 document.getElementById("submit").disabled = true;
+
+					
+					
+					
+					
+					
+                }
+				
+				else{
+                    $("#username_response").html("<span class='not-exists'> You can SignUp.</span>");
+						document.getElementById("submit").disabled = false;
+                }
+
+             }
+          });
+      }else{
+         $("#username_response").hide();
+      }
+
+    });
+
+ });
+</script>
+
+<script>
+
+
 
 
 $(document).ready(function(){
@@ -224,15 +329,22 @@ $(document).ready(function(){
 	 
 
     
-         $("#username_response").show();
+         $("#password_response").show();
        
             
 
 			if(confirmpassword!=password){
-				$("#username_response").html("<span class='exists'>* Does not match.</span>");
-				return false;
+				$("#password_response").html("<span class='notmatch'> Does not match.</span>");
+				 document.getElementById("submit").disabled = true;
+				
+						
+				
+			
+			
+			
 			}else{
-				$("#username_response").html("<span class='not-exists'> Match.</span>");
+				$("#password_response").html("<span class='matchpass'> Match.</span>");
+				document.getElementById("submit").disabled = false;
 			}
 
              
